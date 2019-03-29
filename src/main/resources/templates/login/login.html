@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ==== Document Title ==== -->
+    <title>USNews - Multipurpose News, Magazine and Blog HTML5 Template</title>
+    
+    <!-- ==== Document Meta ==== -->
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- ==== Favicons ==== -->
+    <link rel="icon" href="../static/icon/favicon.png" type="image/png">
+
+    <script th:src="@{/js/login.js}"></script>
+    <script th:src="@{/js/register.js}"></script>
+    <!-- ==== Webjars ==== -->
+    <div th:replace="commons/section::webjars"></div>
+</head>
+<body>
+
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="preloader bg--color-1--b" data-preloader="1">
+            <div class="preloader--inner"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        <!-- Login Section Start -->
+        <div class="login--section pd--100-0 bg--overlay" data-bg-img="img/login-img/bg.jpg">
+            <div class="container">
+                <!-- Login Form Start -->
+                <div class="login--form">
+                    <div class="title">
+                        <h1 class="h1">登陆</h1>
+                    </div>
+                    <form data-form="validate" id="userForm" onkeydown="if(event.keyCode==13){return false;}">
+                        <div class="form-group" id="username">
+                            <label>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-1" style="padding: 0px">
+                                            <span>用户名或邮箱</span>
+                                        </div>
+                                        <div class="col-sm-2" style="padding: 0px">
+                                            <p id="emailMessage" style="display: none;color:#f00">邮箱有误</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="email" name="email" id="emailInput" class="form-control"  required>
+                                <button id="sendSecurity"  class="btn-link pull-right" style="display: none" onclick="securityButtonOnClick(60)">发送验证码</button>
+                            </label>
+                        </div>
+
+                        <div class="form-group"id="password">
+                            <label>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-1" style="padding: 0px">
+                                            <span>密码</span>
+                                        </div>
+                                        <div class="col-sm-2" style="padding: 0px">
+                                            <p id="passwordMessage" style="display: none;color:#f00">密码至少大于六位</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="password" name="password" id="passwordInput" class="form-control" required>
+                            </label>
+                        </div>
+
+                        <div class="form-group"id="confirm" style="display: none">
+                            <label>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-1" style="padding: 0px">
+                                            <span>确认密码</span>
+                                        </div>
+                                        <div class="col-sm-2" style="padding: 0px">
+                                            <p id="confirmMessage" style="display: none;color:#f00">两次输入不一致</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="password" name="confirm" class="form-control" required>
+                            </label>
+                        </div>
+
+                        <div class="form-group"id="security" style="display:none">
+                            <label>
+                                <span>验证码</span>
+                                <input type="text" name="security" class="form-control" required>
+                            </label>
+                        </div>
+
+                        <div class="checkbox"  style="margin-top:20px" id="rememberMe">
+                            <label>
+                                <input type="checkbox" name="rememberMe">
+                                <span >记住我</span>
+                            </label>
+                        </div>
+
+                        <p class="pull-left" id="message" style="margin-top:20px;color:#f00;display: none;">登陆错误，重登</p>
+
+                        <button onclick="userLogin()" type="button" class="btn btn-lg btn-block btn-primary" id="userLoginAction" >登陆</button>
+                        <button onclick="userRegister()" type="button" class="btn btn-lg btn-block btn-primary" style="display: none" id="userRegisterAction" >注册</button>
+
+                        <p class="help-block clearfix" id="forgetRegister">
+                            <a href="#" class="btn-link pull-left">忘记密码？</a>
+                            <button  id="registerButton" class="btn-link pull-right" status="2" onclick="registerButtonOnclick()">注册</button>
+                        </p>
+                    </form>
+                </div>
+                <!-- Login Form End -->
+            </div>
+        </div>
+        <!-- Login Section End -->
+    </div>
+    <!-- Wrapper End -->
+</body>
+</html>

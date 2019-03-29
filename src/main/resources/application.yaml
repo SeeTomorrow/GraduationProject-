@@ -1,0 +1,40 @@
+spring:
+  datasource:
+#基本数据源配置
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/bestnew
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+#禁用缓存
+  thymeleaf:
+    cache: false
+
+
+#邮箱编程配置
+  mail:
+    host: smtp.qq.com
+    username: 2975993378@qq.com
+    password: spyuourbprgddcff
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+
+
+
+#mybatis配置文件路径和mapper映射文件路径
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#打印执行的sql语句
+logging:
+  level:
+    com.generator.mapper: debug

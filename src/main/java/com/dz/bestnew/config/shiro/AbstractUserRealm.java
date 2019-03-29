@@ -48,8 +48,8 @@ public abstract class AbstractUserRealm extends AuthorizingRealm {
         if(user!=null){
             //若存在，将此用户放到登陆认证info中，Shiro会进行密码的校验
             //将邮箱作为盐值
-            ByteSource credentialsSalt=ByteSource.Util.bytes(user.getEmail());
-            SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getEmail(), user.getPassword(), credentialsSalt, getName());
+            ByteSource credentialsSalt=ByteSource.Util.bytes(token.getUsername());
+            SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(token.getUsername(), user.getPassword(), credentialsSalt, getName());
             return info;
         }else {
             throw new UnknownAccountException("未知账户，请先注册");

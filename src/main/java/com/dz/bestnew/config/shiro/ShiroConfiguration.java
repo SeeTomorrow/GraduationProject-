@@ -3,11 +3,14 @@ package com.dz.bestnew.config.shiro;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -104,8 +107,8 @@ public class ShiroConfiguration {
 
         filterChainDefinitionMap.put("/login.html","anon");
 //        filterChainDefinitionMap.put("/user/login","anon");
-        filterChainDefinitionMap.put("/home.html","anon");
-        filterChainDefinitionMap.put("/","anon");
+        filterChainDefinitionMap.put("/","user");
+        filterChainDefinitionMap.put("/home.html","user");
 //        filterChainDefinitionMap.put("/**","authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -130,6 +133,9 @@ public class ShiroConfiguration {
         //注入缓存管理器
         securityManager.setCacheManager(ehcacheManager());
 
+        //注入cookie管理对象
+        securityManager.setRememberMeManager(rememberMeManager());
+
         return securityManager;
     }
     
@@ -142,7 +148,7 @@ public class ShiroConfiguration {
         //加密迭代次数
         credentialsMatcher.setHashIterations(1024);
         //true加密用的hex编码，false用的base64编码
-//        credentialsMatcher.setStoredCredentialsHexEncoded();
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
         //重新尝试的次数（自己定义的）
         credentialsMatcher.setRetryMax(5);
         return credentialsMatcher;
@@ -186,5 +192,30 @@ public class ShiroConfiguration {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor=new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+
+    /**
+     * cookie对象
+     * @return
+     */
+    public SimpleCookie rememberMeCookie() {
+        // 设置cookie名称，对应login.html页面的<input type="checkbox" name="rememberMe"/>
+        SimpleCookie cookie = new SimpleCookie("rememberMe");
+        // 设置cookie的过期时间，单位为秒，这里为一天
+        cookie.setMaxAge(86400);
+        return cookie;
+    }
+
+    /**
+     * cookie管理对象
+     * @return
+     */
+    public CookieRememberMeManager rememberMeManager() {
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        // rememberMe cookie加密的密钥
+//        cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+        return cookieRememberMeManager;
     }
 }

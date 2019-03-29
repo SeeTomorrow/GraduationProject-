@@ -36,12 +36,12 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         String username = (String)token.getPrincipal();
         Integer retryCount = cache.get(username);
         if(retryCount == null) {
-            retryCount = new Integer(1);
+            retryCount = new Integer(0);
             cache.put(username, retryCount);
         }
 
 
-        if(retryCount > retryMax) {
+        if(retryCount >= retryMax) {
             throw new ExcessiveAttemptsException("您已连续错误达" + retryMax + "次！请N分钟后再试");
         }else {
             cache.put(username, ++retryCount);

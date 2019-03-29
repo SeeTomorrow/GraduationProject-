@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,11 +64,10 @@ public class LoginController {
      *
      */
     @PostMapping("/user/login")
-    public void login(@Valid User user, BindingResult result, HttpServletRequest request, HttpServletResponse response){
+    public void login(Boolean rememberMe, @Valid User user, BindingResult result, HttpServletRequest request, HttpServletResponse response){
         System.out.println(user);
         logger.info("请求Url:"+request.getRequestURL()+"=="+request.getMethod());
         logger.info("准备登录用户...正在验证用户输入合法性");
-
         response.setContentType("text/html;charset=UTF-8");
         JSONObject messageJson=Utils.getJson();
         boolean successValue = false;
@@ -79,7 +79,7 @@ public class LoginController {
                 messageJson.put("message", fieldError.getDefaultMessage());
             }
         }else {
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getEmail(), user.getPassword());
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getEmail(), user.getPassword(),rememberMe==null?false:true);
 
             //获取当前Subject
             Subject currentUser = SecurityUtils.getSubject();

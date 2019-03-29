@@ -74,13 +74,17 @@ function registerButtonOnclick() {
 //通过ajax验证登陆
     function userLogin() {
         var passwordInput=$("#passwordInput");
-        var rememberMe=$("input[name='rememberMe']");
         var loginMessage=$("#message");
         var userForm=$("#userForm");
         var userLoginAction=$("#userLoginAction")
-
+        
         //serializeArray()方法序列化表单元素
         var loginUser=userForm.serialize();
+        $("#rememberMe").attr("checked")
+
+        /*$.each(loginUser, function(i, field){
+            alert(field.name+"::"+field.value)
+        });*/
 
         $.ajax({
             type:"post",
@@ -98,7 +102,7 @@ function registerButtonOnclick() {
                     userLoginAction.css("background-color","#da0000");
                 }else {
                     //成功，跳转到主页
-                    location.href="";
+                    location.href="home.html";
                 }
 
             }

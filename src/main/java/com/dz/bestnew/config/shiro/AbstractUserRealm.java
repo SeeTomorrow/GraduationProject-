@@ -1,7 +1,13 @@
 package com.dz.bestnew.config.shiro;
 
-import com.dz.bestnew.po.User;
+import com.dz.bestnew.mapper.generator.RoleExtentMapper;
+import com.dz.bestnew.mapper.generator.UserRoleMapper;
+import com.dz.bestnew.mapper.myMapper.MyUserExtentMapper;
+import com.dz.bestnew.mapper.myMapper.MyUserRoleMapper;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.generator.UserRoleKey;
 import com.dz.bestnew.service.LoginService;
+import com.dz.bestnew.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -14,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,6 +36,9 @@ public abstract class AbstractUserRealm extends AuthorizingRealm {
 
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private UserService userService;
+
     //获取用户组的权限信息
     public abstract UserRolesAndPermissions doGetGroupAuthorizationInfo(User userInfo);
     //获取用户角色的权限信息
@@ -59,7 +69,15 @@ public abstract class AbstractUserRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //获取当前验证的用户名
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        String username = user.getEmail();
+        System.out.println("用户" + username + "获取权限-----ShiroRealm.doGetAuthorizationInfo");
+
+        UserRoleKey userRole = userService.findRolesByEmail(username);
+        Set<String> role = new HashSet<>();
+        role.add(userRole)
+
+        /*//获取当前验证的用户名
         String currentLoginName = (String)principalCollection.getPrimaryPrincipal();
 
         Set<String> userRoles=new HashSet<>();
@@ -81,13 +99,13 @@ public abstract class AbstractUserRealm extends AuthorizingRealm {
             userPermissions.addAll(groupContainer.getUserPermissions());
         }else{
             throw new AuthenticationException();
-        }
+        }*/
         //为当前用户设置角色和权限
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.addRoles(userRoles);
-        authorizationInfo.addStringPermissions(userPermissions);
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addRoles(userRoles);
+        simpleAuthorizationInfo.addStringPermissions(userPermissions);
         logger.info("#####【获取角色成功】[SessionId]==>",SecurityUtils.getSubject().getSession().getId());
-        return authorizationInfo;
+        return simpleAuthorizationInfo;
     }
 
     protected class UserRolesAndPermissions {

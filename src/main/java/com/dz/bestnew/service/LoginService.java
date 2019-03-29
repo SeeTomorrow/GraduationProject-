@@ -1,6 +1,7 @@
 package com.dz.bestnew.service;
 
-import com.dz.bestnew.po.User;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.myPOJO.RegisterUser;
 
 import java.util.Set;
 
@@ -17,5 +18,5 @@ import java.util.Set;
 public interface LoginService {
     User getUserByEmail(String email);
     Set<String> findRoles(String email);
-    boolean register(User user);
+    boolean register(RegisterUser user);
 }

@@ -77,7 +77,7 @@ function registerButtonOnclick() {
         var loginMessage=$("#message");
         var userForm=$("#userForm");
         var userLoginAction=$("#userLoginAction")
-        
+
         //serializeArray()方法序列化表单元素
         var loginUser=userForm.serialize();
         $("#rememberMe").attr("checked")

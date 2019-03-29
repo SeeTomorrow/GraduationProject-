@@ -1,6 +1,6 @@
 package com.dz.bestnew.utils.mail;
 
-import com.dz.bestnew.po.EmailInfo;
+import com.dz.bestnew.po.myPOJO.EmailInfo;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,7 +20,7 @@ public class MailUtil {
      *  通过传入的用户邮箱返回一个邮箱模型
      * @date: 2019/3/25 19:55
      * @param: [user]
-     * @return: com.dz.bestnew.po.EmailInfo
+     * @return: com.dz.bestnew.po.myPOJO.EmailInfo
      *
      */
     public static EmailInfo getMailModel (String email){

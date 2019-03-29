@@ -1,6 +1,6 @@
 package com.dz.bestnew.service;
 
-import com.dz.bestnew.po.EmailInfo;
+import com.dz.bestnew.po.myPOJO.EmailInfo;
 
 import java.util.HashMap;
 

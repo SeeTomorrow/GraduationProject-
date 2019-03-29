@@ -1,7 +1,7 @@
 package com.dz.bestnew.controller.login;
 
-import com.dz.bestnew.po.RegisterUser;
-import com.dz.bestnew.po.User;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.myPOJO.RegisterUser;
 import com.dz.bestnew.service.EmailService;
 import com.dz.bestnew.service.LoginService;
 import com.dz.bestnew.utils.Utils;
@@ -9,6 +9,7 @@ import com.dz.bestnew.utils.mail.MailUtil;
 import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,7 +84,7 @@ public class LoginController {
             //获取当前Subject
             Subject currentUser = SecurityUtils.getSubject();
 
-            currentUser.getSession();
+            Session session = currentUser.getSession();
             /*
              *在调用了login()后，SecurityManager会收到AuthenticationToken
              *并将其发送给配置好的Realm执行必须的认证操作

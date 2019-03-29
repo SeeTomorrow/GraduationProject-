@@ -1,13 +1,12 @@
 package com.dz.bestnew.utils.validator;
 
 import com.dz.bestnew.controller.login.LoginController;
-import com.dz.bestnew.po.RegisterUser;
-import com.dz.bestnew.po.User;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.myPOJO.RegisterUser;
 import com.dz.bestnew.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.util.HashMap;

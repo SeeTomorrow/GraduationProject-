@@ -1,8 +1,13 @@
 package com.dz.bestnew.service;
 
-import com.dz.bestnew.po.User;
-import org.springframework.stereotype.Service;
+import com.dz.bestnew.po.generator.Extent;
+import com.dz.bestnew.po.generator.Role;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.generator.UserRoleKey;
+import com.dz.bestnew.po.myPOJO.UserExtent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,6 +22,15 @@ import java.util.Set;
 
 
 public interface UserService {
-    public User getUserByEmail(String email);
-    public Set<String> findRoles(String email);
+    User getUserByEmail(String email);
+
+
+    //通过用户邮箱查询用户对应的角色
+    ArrayList<String> findRolesByEmail(String email);
+
+    //通过用户邮箱查询用户对应的权限
+    UserExtent findExtentByEmail(String email);
+
+
+
 }

@@ -1,8 +1,9 @@
 package com.dz.bestnew.serviceImp;
 
-import com.dz.bestnew.mapper.UserMapper;
-import com.dz.bestnew.po.User;
-import com.dz.bestnew.po.UserExample;
+import com.dz.bestnew.mapper.generator.UserMapper;
+import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.generator.UserExample;
+import com.dz.bestnew.po.myPOJO.RegisterUser;
 import com.dz.bestnew.service.LoginService;
 import com.dz.bestnew.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class LoginServiceImp implements LoginService {
     private UserMapper userMapper;
 
     @Override
-    public boolean register(User user) {
+    public boolean register(RegisterUser user) {
         user.setPassword(Utils.encrypt(user.getPassword(),user.getEmail()));
         user.setUserId(Utils.getUUID(user.getEmail()));
         user.setEmail(Utils.encrypt(user.getEmail(),user.getEmail()));

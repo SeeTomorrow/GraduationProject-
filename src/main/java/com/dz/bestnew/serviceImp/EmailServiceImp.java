@@ -1,6 +1,6 @@
 package com.dz.bestnew.serviceImp;
 
-import com.dz.bestnew.po.EmailInfo;
+import com.dz.bestnew.po.myPOJO.EmailInfo;
 import com.dz.bestnew.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

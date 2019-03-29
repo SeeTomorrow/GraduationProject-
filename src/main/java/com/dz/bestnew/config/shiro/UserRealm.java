@@ -1,22 +1,23 @@
 package com.dz.bestnew.config.shiro;
 
-import com.dz.bestnew.po.User;
-import org.springframework.stereotype.Component;
+import com.dz.bestnew.po.generator.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * 描述:
- * Realm具体规则
  *
+ *  获取用户角色和权限
  * @author 秃头的安娜
  * @create 2019-02-26 18:10
  */
 
-//疑问：两个方法一致
 
 public class UserRealm extends AbstractUserRealm {
+
+
 
     @Override
     public UserRolesAndPermissions doGetGroupAuthorizationInfo(User userInfo) {

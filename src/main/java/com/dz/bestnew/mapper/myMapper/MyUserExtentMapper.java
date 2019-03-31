@@ -1,10 +1,8 @@
 package com.dz.bestnew.mapper.myMapper;
 
-import com.dz.bestnew.po.generator.UserRoleKey;
-import com.dz.bestnew.po.myPOJO.UserExtent;
+import com.dz.bestnew.po.Extent;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @ClassName MyUserExtentMapper
@@ -14,6 +12,6 @@ import java.util.Set;
  * @Date 2019/3/29 20:28
  */
 public interface MyUserExtentMapper {
-    Set<String> selectExtentByRole(Integer roleId);
-
+    //根据角色id查询权限
+    List<Extent> selectExtentByRoleId(Integer roleId);
 }

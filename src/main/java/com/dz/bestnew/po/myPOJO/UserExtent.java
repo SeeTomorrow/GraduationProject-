@@ -1,8 +1,9 @@
 package com.dz.bestnew.po.myPOJO;
 
-import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.Extent;
+import com.dz.bestnew.po.User;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @ClassName UserExtent
@@ -11,23 +12,23 @@ import java.util.Set;
  * @Author Hasee
  * @Date 2019/3/29 20:24
  */
-public class UserExtent extends User {
-    private String role;
-    private Set<String> extents;
+public class UserExtent {
+    private List<Extent> extents;
+    private User user;
 
-    public String getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Set<String> getExtents() {
+    public List<Extent> getExtents() {
         return extents;
     }
 
-    public void setExtents(Set<String> extents) {
+    public void setExtents(List<Extent> extents) {
         this.extents = extents;
     }
 }

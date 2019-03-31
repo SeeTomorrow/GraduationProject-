@@ -34,12 +34,12 @@
         </javaModelGenerator>
 
         <!-- !!!! Mapper XML Configurations !!!! -->
-        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject=".\src\main\resources">
+        <sqlMapGenerator targetPackage="mybatis.mapper.generator" targetProject=".\src\main\resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- !!!! Mapper Interface Configurations !!!! -->
-        <javaClientGenerator targetPackage="com.dz.bestnew.mapper" targetProject=".\src\main\java"
+        <javaClientGenerator targetPackage="com.dz.bestnew.mapper.generator" targetProject=".\src\main\java"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
@@ -54,7 +54,6 @@
         <table schema="" tableName="role_extent"></table>
         <table schema="" tableName="user_collection"></table>
         <table schema="" tableName="user_comment"></table>
-        <table schema="" tableName="user_role"></table>
         <table schema="" tableName="user_share"></table>
         <table schema="" tableName="user_subscription"></table>
         <table schema="" tableName="user"></table>

@@ -1,14 +1,16 @@
 package com.dz.bestnew.controller.login;
 
-import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.User;
 import com.dz.bestnew.po.myPOJO.RegisterUser;
 import com.dz.bestnew.service.EmailService;
 import com.dz.bestnew.service.LoginService;
-import com.dz.bestnew.utils.Utils;
+import com.dz.bestnew.utils.user.UserUtils;
 import com.dz.bestnew.utils.mail.MailUtil;
 import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -69,7 +71,7 @@ public class LoginController {
         logger.info("请求Url:"+request.getRequestURL()+"=="+request.getMethod());
         logger.info("准备登录用户...正在验证用户输入合法性");
         response.setContentType("text/html;charset=UTF-8");
-        JSONObject messageJson=Utils.getJson();
+        JSONObject messageJson= UserUtils.getJson();
         boolean successValue = false;
 
         //校验数据合法性
@@ -133,12 +135,13 @@ public class LoginController {
 
     
     @PostMapping("/user/register")
+    @RequiresGuest //shiro注解当前Subject没有身份验证或通过记住我登录过，即是游客身份。
     public void register(@Valid RegisterUser user, BindingResult result,HttpServletRequest request, HttpServletResponse response){
         logger.info("请求Url:"+request.getRequestURL()+"=="+request.getMethod());
         logger.info("准备注册用户...正在验证用户输入合法性");
 
         response.setContentType("text/html;charset=UTF-8");
-        JSONObject messageJson=Utils.getJson();
+        JSONObject messageJson= UserUtils.getJson();
         boolean successValue = false;
 
         //校验数据合法性
@@ -172,12 +175,13 @@ public class LoginController {
      */
 
     @GetMapping("/email/getSecurity")
+    @RequiresGuest //shiro注解当前Subject没有身份验证或通过记住我登录过，即是游客身份。
     public void getSecurity(String email,
                             HttpServletRequest request, HttpServletResponse response){
 
         logger.info("请求Url:"+request.getRequestURL()+"=="+request.getParameter("email")+"=="+request.getMethod()+"=="+request.getRequestURI());
         response.setContentType("text/html;charset=UTF-8");
-        JSONObject messageJson=Utils.getJson();
+        JSONObject messageJson= UserUtils.getJson();
         boolean successValue = false;
 
 
@@ -208,6 +212,7 @@ public class LoginController {
 
 
     @GetMapping("/user/logout")
+    @RequiresUser//表示当前Subject已经身份验证或者通过记住我登录的。
     public void logout(){
         //使用权限管理工具进行用户的退出
         SecurityUtils.getSubject().logout();
@@ -215,6 +220,10 @@ public class LoginController {
     }
 
 
+    @GetMapping("/403")
+    public String error(){
+        return "403";
+    }
 
 
 }

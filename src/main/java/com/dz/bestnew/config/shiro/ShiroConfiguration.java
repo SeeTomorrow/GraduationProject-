@@ -1,5 +1,6 @@
 package com.dz.bestnew.config.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -55,6 +56,11 @@ public class ShiroConfiguration {
     }
 
 
+    //配置shiro标签
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
+    }
 
 
 

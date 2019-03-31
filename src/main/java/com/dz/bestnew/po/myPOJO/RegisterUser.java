@@ -1,6 +1,6 @@
 package com.dz.bestnew.po.myPOJO;
 
-import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.User;
 import org.springframework.stereotype.Component;
 
 /**

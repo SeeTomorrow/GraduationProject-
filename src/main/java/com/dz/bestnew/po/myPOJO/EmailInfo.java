@@ -1,6 +1,6 @@
 package com.dz.bestnew.po.myPOJO;
 
-import com.dz.bestnew.utils.Utils;
+import com.dz.bestnew.utils.user.UserUtils;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class EmailInfo {
     private List<String> attachPath; //附件路径
 
     public EmailInfo() {
-        security=Utils.getSecurity();
+        security= UserUtils.getSecurity();
     }
 
     public int getSecurity() {

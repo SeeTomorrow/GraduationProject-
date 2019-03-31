@@ -1,14 +1,8 @@
 package com.dz.bestnew.service;
 
-import com.dz.bestnew.po.generator.Extent;
-import com.dz.bestnew.po.generator.Role;
-import com.dz.bestnew.po.generator.User;
-import com.dz.bestnew.po.generator.UserRoleKey;
+import com.dz.bestnew.po.User;
 import com.dz.bestnew.po.myPOJO.UserExtent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @Title: 用户相关操作接口
@@ -22,15 +16,11 @@ import java.util.Set;
 
 
 public interface UserService {
-    User getUserByEmail(String email);
+    User findUserByEmail(String email);
 
+    //通过用户查询用户对应的角色，该系统每个用户仅仅对应一个角色
+    String findRolesByUser(User user);
 
-    //通过用户邮箱查询用户对应的角色
-    ArrayList<String> findRolesByEmail(String email);
-
-    //通过用户邮箱查询用户对应的权限
-    UserExtent findExtentByEmail(String email);
-
-
-
+    //通过用户查询用户对应的权限
+    UserExtent findExtentByUser(User user);
 }

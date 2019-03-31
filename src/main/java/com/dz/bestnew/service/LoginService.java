@@ -1,6 +1,6 @@
 package com.dz.bestnew.service;
 
-import com.dz.bestnew.po.generator.User;
+import com.dz.bestnew.po.User;
 import com.dz.bestnew.po.myPOJO.RegisterUser;
 
 import java.util.Set;

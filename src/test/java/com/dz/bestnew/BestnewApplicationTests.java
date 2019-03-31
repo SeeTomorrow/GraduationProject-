@@ -16,6 +16,6 @@ public class BestnewApplicationTests {
 
     @Test
     public void contextLoads() {
-        userService.getUserByEmail("fs");
+        userService.findUserByEmail("fs");
     }
 }
